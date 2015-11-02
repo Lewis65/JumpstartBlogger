@@ -1,0 +1,13 @@
+<h1>All Tags</h1>
+<ul>
+	<% @alltags.each do |t| %>
+		<% if (t.articles.count > 0) %>
+		<li>
+			<%= link_to t.name, tag_path(t) %>
+			(<%= t.articles.count %>)
+			<%= link_to "delete", "" , method: :delete, data: {confirm: "Really delete this tag?"} %>
+		</li>
+		<% else t.destroy %>
+		<% end %>
+	<% end %>
+</ul>

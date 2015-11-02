@@ -3,6 +3,17 @@
 </head>
 <body>
 	<h1><%= @article.title %></h1>
+	<% @tags_for_article = @article.tags.all %>
+	<p>
+		<%= link_to "Tags", :controller => 'tags', :action => 'index' %>: 
+		<% if(@tags_for_article.count == 0) %>
+			<%= "none" %>
+		<% else %>
+			<% @tags_for_article.map do |t| %>
+				<%= link_to t.name, tag_path(t) %>
+			<% end %>
+		<% end %>
+	</p><br/>
 	<p><%= @article.body %></p>
 	<h3>Comments (<%= @article.comments.size %>)</h3>
 	<%= render partial: 'articles/comment', collection: @article.comments %>
