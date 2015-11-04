@@ -10,6 +10,8 @@
 			</li>
 		<% end %>
 	</ul>
+	<% if logged_in? %>
 	<br><p><%= link_to "Create new article", new_article_path %></p>
+	<% end %>
 </body>
 </html>
