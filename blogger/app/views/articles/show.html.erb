@@ -3,6 +3,7 @@
 </head>
 <body>
 	<h1><%= @article.title %></h1>
+
 	<% @tags_for_article = @article.tags.all %>
 	<p>
 		<%= link_to "Tags", :controller => 'tags', :action => 'index' %>: 
@@ -14,12 +15,19 @@
 			<% end %>
 		<% end %>
 	</p><br/>
+
+	<% if @article.image.exists? %>
+		<p class="imgwrapper"><%= image_tag @article.image.url, :class => "mainimg" %></p><br/>
+	<% end %>
+
 	<p><%= @article.body %></p>
+
 	<h3>Comments (<%= @article.comments.size %>)</h3>
 	<%= render partial: 'articles/comment', collection: @article.comments %>
 	<%= render partial: 'comments/form' %>
 	<%= link_to "Edit", edit_article_path(@article) %>
 	<%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "Really delete this article?"} %><br>
 	<%= link_to "Back to Articles List", articles_path %>
+
 </body>
 </html>
